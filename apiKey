@@ -1,0 +1,18 @@
+secret : spetshop2021
+C4ljnQQQ3BbAN9OcQnEBEc6Dm18NdZA8yzwVcz2fMU4=
+
+
+{
+  "secureExpire": "9999-12-31",
+  "apiKeyInfos": [
+    {
+      "generatedTimestamp": "2021-10-06T21:19:42.723746498",
+      "user": "USER",
+      "role": "USER",
+      "module": "petshop",
+      "expireDate": "9999-12-31",
+      "apikey": "4pmvXc45fo0ZZKp/gwSwFgSgHxOCcqranEPFB+f6PC0="
+    }
+  ],
+  "expired": false
+}
