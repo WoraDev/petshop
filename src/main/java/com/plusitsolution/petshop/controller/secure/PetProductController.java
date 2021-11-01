@@ -1,52 +1,54 @@
 package com.plusitsolution.petshop.controller.secure;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.plusitsolution.petshop.domain.ProductOptionDomain;
 import com.plusitsolution.petshop.entity.PetProductEntity;
-import com.plusitsolution.petshop.service.PetShopServices;
+import com.plusitsolution.petshop.service.PetShopService;
 
 @RestController 
 public class PetProductController {
 	
 	@Autowired
-	private PetShopServices petShopServices;
+	private PetShopService petShopServices;
 		
-	@PostMapping("/newProduct")
+	@PostMapping("/product")
 	public PetProductEntity addPetProduct (@RequestParam("petProductName") String petProductName
-			,@RequestParam(value ="petProductCategory") String petProductCategory
+			,@RequestParam(value ="petProductCategory") String petProductSubCategory
 			,@RequestParam(value ="petProductPrice") double petProductPrice
 			,@RequestParam(value ="petProductInfo") String petProductInfo
 			,@RequestParam(value ="petProductBrand") String petProductBrand
 			,@RequestParam(value ="inStockAmount") int inStockAmount){
 		return petShopServices.addProduct(petProductName,
-				petProductCategory,
+				petProductSubCategory,
 				petProductPrice,
 				petProductInfo,
 				petProductBrand,
 				inStockAmount);
 	}
 	
-	@PostMapping("/editProduct")
+	@PutMapping("/product")
 	public PetProductEntity editProduct(@RequestParam("petProductName") String petProductName
-			,@RequestParam(value ="petProductCategory") String petProductCategory
-			,@RequestParam(value ="petProductPrice") double petProductPrice
-			,@RequestParam(value ="petProductInfo") String petProductInfo
-			,@RequestParam(value ="petProductBrand") String petProductBrand
-			,@RequestParam(value ="intStockAmount") int inStockAmount){
+			,@RequestParam(value ="petProductCategory", required = false) String petProductSubCategory
+			,@RequestParam(value ="petProductPrice", required = false) double petProductPrice
+			,@RequestParam(value ="petProductInfo", required = false) String petProductInfo
+			,@RequestParam(value ="petProductBrand", required = false) String petProductBrand
+			,@RequestParam(value ="intStockAmount", required = false) int inStockAmount){
 		return petShopServices.editProduct(petProductName,
-				petProductCategory,
-				petProductPrice,
-				petProductInfo,
-				petProductBrand,
-				inStockAmount);
+											petProductSubCategory,
+											petProductPrice,
+											petProductInfo,
+											petProductBrand,
+											inStockAmount);
 	}
 	
 	@DeleteMapping("/product")
@@ -54,19 +56,33 @@ public class PetProductController {
 		petShopServices.deleteProduct(petProductName);
 	}
 	
-	@GetMapping("/Products")
+	@GetMapping("/products")
 	public List<PetProductEntity> getProducts(){
 		return petShopServices.getProducts();
 	}
 	
-	@GetMapping("/productByName")
+	@GetMapping("/product")
 	public PetProductEntity getProductByName(@RequestParam("petProductName") String petProductName){
 		return petShopServices.getProductByName(petProductName);
 	}
 	
-	@GetMapping("/ProductByCategory")
+	@GetMapping("/productByCategory")
 	public List<PetProductEntity> getProductByCategory(@RequestParam("petProductCategory")String petProductCategory){
 		
 		return petShopServices.getProductByCategory(petProductCategory);
+	}
+	
+	@PostMapping("/productOption")
+	public PetProductEntity addPetProduct (@RequestParam("petProductName") String petProductName
+			,@RequestParam(value ="optionName") String optionName,
+			@RequestParam(value ="optionDetail", required = false) String optionDetail,
+			@RequestParam(value ="price") double price){
+		return petShopServices.addProductOption(petProductName,optionName,optionDetail,price);
+	}
+	
+	@DeleteMapping("/productOption")
+	public PetProductEntity removePetProduct (@RequestParam("petProductName") String petProductName
+			,@RequestParam(value ="optionName") String optionName){
+		return petShopServices.removeProductOption(petProductName,optionName);
 	}
 }

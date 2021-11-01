@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.plusitsolution.petshop.entity.PetProductCategoryEntity;
+import com.plusitsolution.petshop.entity.CategoryEntity;
 import com.plusitsolution.petshop.service.PetProductCategoryService;
 
 @RestController 
@@ -18,25 +18,24 @@ public class PetProductCategoryController {
 	@Autowired
 	private PetProductCategoryService petProductCategoryService;
 		
-	@PostMapping("/newProductMainCategory")
-	public PetProductCategoryEntity addPetProductCategory(@RequestParam("petProductMainCategory") String petProductMainCategory
+	@PostMapping("/productMainCategory")
+	public CategoryEntity addPetProductCategory(@RequestParam("petProductMainCategory") String petProductMainCategory
 			,@RequestParam(value ="petProductCategory") List<String> petProductSubCategory){
 		return petProductCategoryService.addCategory(petProductMainCategory,
 				petProductSubCategory);
 	}
 	
-	@DeleteMapping("/productCategory")
+	@DeleteMapping("/productMainCategory")
 	public void deletePetProduct (@RequestParam("petProductMainCategory") String petProductMainCategory) {
 		petProductCategoryService.deleteCategory(petProductMainCategory);
 	}
 	
-	@GetMapping("/productCategories")
-	public List<PetProductCategoryEntity> getProductCategories(){
+	@GetMapping("/productMainCategories")
+	public List<CategoryEntity> getProductCategories(){
 		return petProductCategoryService.getProductCategories();
 	}
 	
-	
-	@PostMapping("/addProductSubCatergory")
+	@PostMapping("/productSubCatergory")
 	public String addPetProductSubCategory (@RequestParam("petProductName") String petProductMainCategory,
 										  @RequestParam("petProductSubCategory") String petProductSubCategory) {
 		petProductCategoryService.addSubCategory(petProductMainCategory,petProductSubCategory);

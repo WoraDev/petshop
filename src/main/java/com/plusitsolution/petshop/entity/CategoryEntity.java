@@ -9,13 +9,14 @@ import org.springframework.data.elasticsearch.annotations.Field;
 import org.springframework.data.elasticsearch.annotations.FieldType;
 
 @Document (indexName = "petproductcategory-index")
-public class PetProductCategoryEntity {
+public class CategoryEntity {
 	
 	@Id 
 	@ReadOnlyProperty
 	private String petProductCategoryId;
 	@Field (type = FieldType.Keyword)
 	private String petProductMainCategory;
+
 	private List<String> petProductSubCategory;
 	
 	
@@ -34,8 +35,25 @@ public class PetProductCategoryEntity {
 	public List<String> getPetProductSubCategory() {
 		return petProductSubCategory;
 	}
-	public void setPetProductSubCategory(List<String> petProductMainCategory) {
-		this.petProductSubCategory = petProductMainCategory;
+	
+	public void setPetProductSubCategory(List<String> petProductSubCategory) {
+		this.petProductSubCategory = petProductSubCategory;
+	}
+	
+	public void addPetProductSubCategory(String petProductSubCategory) {
+		this.petProductSubCategory.add(petProductSubCategory);
+	}
+	
+	public void removePetProductSubCategory(String petProductSubCategory) {
+		this.petProductSubCategory.remove(petProductSubCategory);
+	}
+	
+	public boolean checkPetProductSubCategory(String petProductSubCategory) {
+		if(this.petProductSubCategory.contains(petProductSubCategory))
+			{
+			return true;
+			}
+		return false;
 	}
 	
 	

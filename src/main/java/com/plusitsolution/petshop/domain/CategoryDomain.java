@@ -2,9 +2,9 @@ package com.plusitsolution.petshop.domain;
 
 import java.util.List;
 
-import com.plusitsolution.petshop.entity.PetProductCategoryEntity;
+import com.plusitsolution.petshop.entity.CategoryEntity;
 
-public class PetProductCategoryDomain {
+public class CategoryDomain {
 
 	private String petProductCategoryId;
 	private String petProductMainCategory;
@@ -28,8 +28,8 @@ public class PetProductCategoryDomain {
 		this.petProductSubCategory = petProductSubCategory;
 	}
 	
-	public PetProductCategoryEntity toEntity() {
-		PetProductCategoryEntity entity = new PetProductCategoryEntity();
+	public CategoryEntity toEntity() {
+		CategoryEntity entity = new CategoryEntity();
 		entity.setPetProductMainCategory(petProductMainCategory);
 		entity.setPetProductSubCategory(petProductSubCategory);
 		return entity;

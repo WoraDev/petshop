@@ -9,7 +9,7 @@ import com.plusitsolution.petshop.entity.PetProductEntity;
 @Repository
 public interface PetProductRepository extends ElasticsearchRepository<PetProductEntity, String> {
 	public List<PetProductEntity> findAll();
-	public List<PetProductEntity> findBypetProductSubCategory(String petProductSubCategory);
 	public PetProductEntity findBypetProductNameStartsWith(String petProductName);
 	public PetProductEntity findBypetProductName(String petProductName);
+	public List<PetProductEntity> findBypetProductSubCategory(String petProductSubCategory);
 }
